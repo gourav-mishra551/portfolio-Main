@@ -12,6 +12,7 @@ import WorkPage from "./components/WorkPage";
 import MySkillsPage from "./components/MySkillsPage";
 import SoundBar from "./subComponents/SoundBar";
 import ContactPage  from "./components/ContactPage";
+import { BackgroundProvider } from "./context/BackgroundContext";
 
 function App() {
   const location = useLocation();
@@ -20,7 +21,8 @@ function App() {
       <GlobalStyle />
 
       <ThemeProvider theme={lightTheme}>
-        <SoundBar />
+        <BackgroundProvider>
+          <SoundBar />
 
         {/* For framer-motion animation on page change! */}
         {/* Changed prop from exitBefore to mode */}
@@ -45,6 +47,7 @@ you can add custom 404 component or message instead of Main component*/}
             <Route path="*" element={<Main />} />
           </Routes>
         </AnimatePresence>
+        </BackgroundProvider>
       </ThemeProvider>
     </>
   );

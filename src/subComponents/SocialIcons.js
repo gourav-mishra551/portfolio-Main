@@ -1,23 +1,35 @@
 import { motion } from "framer-motion";
 import React from "react";
-// import { NavLink } from 'react-router-dom'
 import styled from "styled-components";
-import { Facebook, Github, Twitter , Linkedin } from "../components/AllSvgs";
+import { Facebook, Github, Twitter, Linkedin } from "../components/AllSvgs";
 import { DarkTheme } from "../components/Themes";
+import { device } from "../utils/breakpoints";
 
 const Icons = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-
   position: fixed;
   bottom: 0;
   left: 2rem;
-
-  z-index: 3;
-
+  z-index: 2147483647;
   & > *:not(:last-child) {
     margin: 0.5rem 0;
+  }
+  @media ${device.tablet} {
+    left: 1rem;
+    bottom: 0.5rem;
+    & > *:not(:last-child) {
+      margin: 0.35rem 0;
+    }
+  }
+  @media ${device.mobileL} {
+    left: 1rem;
+    bottom: 0.5rem;
+    & a svg {
+      width: 22px;
+      height: 22px;
+    }
   }
 `;
 
@@ -26,6 +38,12 @@ const Line = styled(motion.span)`
   height: 8rem;
   background-color: ${(props) =>
     props.color === "dark" ? DarkTheme.text : DarkTheme.body};
+  @media ${device.tablet} {
+    height: 5rem;
+  }
+  @media ${device.mobileL} {
+    display: none;
+  }
 `;
 
 const SocialIcons = (props) => {
@@ -88,13 +106,13 @@ const SocialIcons = (props) => {
         transition={{ type: "spring", duration: 1, delay: 1.6 }}
       >
         <a
-          style={{ color: "inherit" , paddingLeft:"30px"}}
+          style={{ color: "inherit" }}
           target="blank"
           href={"https://www.linkedin.com/in/gaurav-mishra-3a8a88239"}
         >
           <Linkedin
-            width={55}
-            height={55}
+            width={25}
+            height={25}
             fill={props.theme === "dark" ? DarkTheme.text : DarkTheme.body}
           />
         </a>

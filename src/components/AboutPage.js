@@ -1,7 +1,6 @@
 import React from 'react'
 import styled, { keyframes, ThemeProvider } from 'styled-components'
-import {DarkTheme} from './Themes';
-
+import { DarkTheme } from './Themes';
 
 import LogoComponent from '../subComponents/LogoComponent';
 import SocialIcons from '../subComponents/SocialIcons';
@@ -9,13 +8,17 @@ import PowerButton from '../subComponents/PowerButton';
 import ParticleComponent from '../subComponents/ParticleComponent';
 import BigTitle from '../subComponents/BigTitlte'
 import astronaut from '../assets/Images/spaceman.png'
+import { device } from '../utils/breakpoints'
 
 const Box = styled.div`
 background-color: ${props => props.theme.body};
-width: 100vw;
-height:100vh;
+width: 100%;
+max-width: 100vw;
+min-height: 100vh;
+min-height: 100dvh;
 position: relative;
-overflow: hidden;
+overflow-x: hidden;
+overflow-y: auto;
 `
 const float = keyframes`
 0% { transform: translateY(-10px) }
@@ -33,8 +36,37 @@ img{
     width: 100%;
     height: auto;
 }
+
+@media ${device.tablet} {
+  width: 25vw;
+  top: 8%;
+  right: 3%;
+}
+
+@media ${device.mobileL} {
+  width: 30vw;
+  top: 5%;
+  right: 2%;
+}
+
+@media ${device.mobileM} {
+  width: 35vw;
+  top: 4%;
+}
+
+  @media ${device.mobileS} {
+  width: 40vw;
+  top: 3%;
+  right: 0;
+}
 `
-const Main =  styled.div`
+
+const SocialIconsWrapper = styled.div`
+  @media ${device.mobileL} {
+    display: none;
+  }
+`
+const Main = styled.div`
   border: 2px solid ${(props) => props.theme.text};
   color: ${(props) => props.theme.text};
   padding: 2rem;
@@ -43,8 +75,8 @@ const Main =  styled.div`
   z-index: 3;
   line-height: 1.5;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  justify-content: flex-start;
+  align-items: flex-start;
   font-size: calc(0.6rem + 1vw);
   backdrop-filter: blur(4px);
   
@@ -53,12 +85,44 @@ const Main =  styled.div`
   top: 10rem;
   font-family: 'Ubuntu Mono', monospace;
   font-style: italic;
-  @media (max-width: 600px) {
-    height:70vh;
-    top: 10rem;
+  overflow: auto;
+
+  @media ${device.tablet} {
+    width: 65vw;
+    left: calc(3rem + 5vw);
+    top: 8rem;
+    padding: 1.5rem;
+    font-size: calc(0.6rem + 1.2vw);
+  }
+
+  @media ${device.mobileL} {
+    width: 88vw;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 8rem;
+    height: auto;
+    min-height: 55vh;
+    max-height: 70vh;
     overflow: auto;
-    padding-top:180px;
- }
+    padding: 1.5rem 1.25rem;
+    font-size: calc(0.65rem + 2vw);
+  }
+
+  @media ${device.mobileM} {
+    width: 92vw;
+    top: 7rem;
+    font-size: calc(0.7rem + 1.5vw);
+  }
+
+  @media ${device.mobileS} {
+    width: 94vw;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 6rem;
+    padding: 1.25rem 1rem;
+    font-size: 0.85rem;
+    min-height: 50vh;
+  }
 `
 
 
@@ -67,32 +131,41 @@ const Main =  styled.div`
 const AboutPage = () => {
     return (
         <ThemeProvider theme={DarkTheme}>
-<Box>
+            <Box>
 
-<LogoComponent theme='dark'/>
-<SocialIcons theme='dark'/>
-<PowerButton />
-<ParticleComponent theme='dark' />
+                <LogoComponent theme='dark' />
+                <SocialIconsWrapper>
+                    <SocialIcons theme='dark' />
+                </SocialIconsWrapper>
+                <PowerButton />
+                <ParticleComponent theme='dark' />
 
-        <Spaceman>
-            <img src={astronaut} alt="spaceman" />
-        </Spaceman>    
-        <Main>
-        Hi Everyone, I am Gourav Mishra from New-Delhi, India ,I'm a MERN stack developer. I love to create simple yet beautiful websites with great user experience.
-<br /> <br/>
-I'm interested in the whole frontend stack.
-<br/> <br/>
-I not only put my entire knowledge into work but also come up with creative and professional solutions. Apart from Coding I love to play games.
+                <Spaceman>
+                    <img src={astronaut} alt="spaceman" />
+                </Spaceman>
+                <Main>
+                    Hello, I’m Gourav Mishra from New Delhi, India — a passionate MERN Stack Developer focused on building scalable, high-performance web applications.
 
-        </Main>
+                    <br /><br />
 
-        <BigTitle text="ABOUT" top="10%" left="5%" />
+                    I specialize in creating clean, efficient, and user-centric digital experiences. My approach combines strong backend architecture with intuitive frontend design to deliver products that are not just functional, but impactful.
+
+                    <br /><br />
+
+                    I enjoy working across the full development cycle — from designing APIs and optimizing databases to crafting responsive interfaces that provide seamless user experiences.
+
+                    <br /><br />
+
+                    Beyond coding, I constantly explore new technologies, research better solutions, and refine my skills to stay ahead in the evolving tech ecosystem. When I’m not building applications, you’ll find me gaming — another space where strategy, logic, and creativity come together.
+                </Main>
+
+                <BigTitle text="ABOUT" top="10%" left="5%" />
 
 
-        </Box>
+            </Box>
 
         </ThemeProvider>
-        
+
     )
 }
 
